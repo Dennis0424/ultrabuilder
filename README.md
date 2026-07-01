@@ -2,7 +2,7 @@
 
 **Advanced full-cycle development workflow for Claude Code** - combining gstack-style strategic thinking with superpowers-style execution discipline, plus agent orchestration, premium UI craft, animation systems, and more.
 
-From vague idea to shipped, monitored, documented product - in one unified pipeline. **43 skills.**
+From vague idea to shipped, monitored, documented product - in one unified pipeline. **36 skills.**
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -150,18 +150,6 @@ Or invoke any individual skill directly.
 |-------|-------------|
 | `/learn` | Cross-session institutional memory with confidence scores |
 | `/context-save` | Save/restore session state |
-
-### Quantitative Finance / AI Hedge Fund
-
-| Skill | What it does |
-|-------|-------------|
-| `/backtest` | Strategy validation — walk-forward, bias detection, robustness checks |
-| `/quant-data` | Market data pipeline — ingestion, feature engineering, ML dataset prep |
-| `/risk-management` | Position sizing, VaR/CVaR, drawdown protection, circuit breakers |
-| `/model-lifecycle` | ML model train → validate → deploy → drift detection → retrain |
-| `/alpha-research` | Signal discovery — statistical testing, factor attribution, decay analysis |
-| `/execution` | Order management — slippage modeling, TWAP/VWAP, smart routing |
-| `/quant-monitor` | Live monitoring — PnL tracking, regime detection, alerting |
 
 ### Orchestrator
 
