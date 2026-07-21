@@ -9,19 +9,20 @@ From vague idea to shipped, monitored, documented product - in one unified pipel
  PHASE 0         PHASE 1          PHASE 2          PHASE 3          PHASE 4
  THINK           PLAN             BUILD            VERIFY           DELIVER
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- office-hours    autoplan         design-explore   build-verify     build-ship
- learn(recall)   build-direction  build-execute    benchmark        land-and-deploy
- context-save    spec             motion-design    health           canary
- pair-program    dx-review        scroll-story     code-review      document
-                 api-design       page-transitions test-gen         diagram
-                 component-arch   investigate      performance      learn(save)
-                                  refactor         accessibility    retro
+ office-hours    autoplan         writing-plans    build-verify     build-ship
+ learn(recall)   build-direction  design-explore   benchmark        land-and-deploy
+ context-save    spec             build-execute    health           canary
+ pair-program    dx-review        motion-design    code-review      document
+                 api-design       scroll-story     test-gen         diagram
+                 component-arch   page-transitions performance      learn(save)
+                                  investigate      accessibility    retro
+                                  refactor
                                   multi-agent
                                   ai-integration
                                   responsive
                                   state-management
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- Challenge       Decide           Execute          Validate         Ship & Learn
+ Challenge       Decide           Plan & Execute   Validate         Ship & Learn
  everything      precisely        solidly          ruthlessly       confidently
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -168,7 +169,7 @@ Challenge whether this is worth building. `/office-hours` asks 6 uncomfortable q
 Lock direction before writing code. `/autoplan` for speed, `/build-direction` for thoroughness. Add `/spec` for complex features, `/dx-review` for developer tools, `/api-design` for backends, `/component-arch` for frontend structure.
 
 ### Phase 2: BUILD
-Execute with discipline. Design system first (`/design-explore`), then animation (`/motion-design`, `/scroll-story`), then TDD implementation (`/build-execute`). Use `/investigate` for bugs, `/refactor` for cleanup, `/multi-agent` for parallel work, `/ai-integration` for LLM features.
+Execute with discipline. Start with `writing-plans` to decompose the spec into an ordered implementation plan with clear dependencies and acceptance criteria. Then design system (`/design-explore`), animation (`/motion-design`, `/scroll-story`), then TDD implementation (`/build-execute`) using the plan as backbone. Use `/investigate` for bugs, `/refactor` for cleanup, `/multi-agent` for parallel work, `/ai-integration` for LLM features.
 
 ### Phase 3: VERIFY
 Catch everything. `/code-review-agent` for adversarial review, `/test-gen` for coverage gaps, `/health` for quality score, `/benchmark` for performance, `/accessibility` for WCAG compliance.
