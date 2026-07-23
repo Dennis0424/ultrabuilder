@@ -1,39 +1,37 @@
 # UltraBuilder
 
-**Advanced full-cycle development workflow for Claude Code** - combining gstack-style strategic thinking with superpowers-style execution discipline, plus agent orchestration, premium UI craft, animation systems, and more.
-
-From vague idea to shipped, monitored, documented product - in one unified pipeline. **36 skills.**
+**Full-cycle delivery workflow for Claude Code** — from vague idea to shipped product in five composable phases. Inspired by [Matt Pocock's skill design](https://github.com/mattpocock/skills), [gstack](https://github.com/garrytan/gstack) strategic thinking, and [superpowers](https://github.com/obra/superpowers) execution discipline.
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- PHASE 0         PHASE 1          PHASE 2          PHASE 3          PHASE 4
- THINK           PLAN             BUILD            VERIFY           DELIVER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- office-hours    autoplan         writing-plans    build-verify     build-ship
- learn(recall)   build-direction  design-explore   benchmark        land-and-deploy
- context-save    spec             build-execute    health           canary
- pair-program    dx-review        motion-design    code-review      document
-                 api-design       scroll-story     test-gen         diagram
-                 component-arch   page-transitions performance      learn(save)
-                                  investigate      accessibility    retro
-                                  refactor
-                                  multi-agent
-                                  ai-integration
-                                  responsive
-                                  state-management
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- Challenge       Decide           Plan & Execute   Validate         Ship & Learn
- everything      precisely        solidly          ruthlessly       confidently
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GRILL  ──→  DECIDE  ──→  BUILD  ──→  VERIFY  ──→  SHIP
+ ↑            ↑            ↑           ↑           ↑
+ fog          frontier     red/green   parallel    canary
+ of war       tickets      tight loop  review axes monitoring
 ```
 
 ## Philosophy
 
-Most AI coding workflows solve only one problem:
-- **gstack** solves "are we building the right thing?" and "is it really working?"
-- **superpowers** solves "are we building it well?"
+Most AI coding workflows solve one problem. UltraBuilder solves the full chain:
 
-UltraBuilder combines both — plus agent orchestration for parallel work, premium UI craft skills, animation systems, API design, and AI integration patterns.
+- **Phase 0 (Grill)** — Is this worth building? Challenge everything before investing.
+- **Phase 1 (Decide)** — Plan only what you can state precisely. Fog stays as fog.
+- **Phase 2 (Build)** — Tight feedback loops. RED → GREEN → REFACTOR → COMMIT.
+- **Phase 3 (Verify)** — Parallel review axes that can't contaminate each other.
+- **Phase 4 (Ship)** — Ship small, watch closely, learn fast.
+
+Each phase works standalone. Each gates the next via concrete completion criteria. Skip what doesn't apply — but never skip the gate check.
+
+## Key Patterns
+
+**The Grilling Primitive** — A relentless interview loop that precedes all work. 5 sentences that save days of wasted effort.
+
+**Fog of War Planning** — Only create tickets for what can be precisely stated NOW. Everything else stays as fog until its dependencies resolve. Prevents premature decomposition.
+
+**Leading Words** — Dense anchors that recruit the model's pretrained knowledge: *scrutiny*, *frontier*, *tight loop*, *parallel axes*, *canary*.
+
+**Completion Criteria** — Every gate is a concrete checkbox list. Not "do you feel done?" but "can you check these 4 boxes?"
+
+**Context Hygiene** — Explicit rules preventing context exhaustion. Fresh subagent per task. Phases 0-1 stay in one window. Never paste full plans into subagents.
 
 ## Quick Start
 
@@ -43,7 +41,6 @@ UltraBuilder combines both — plus agent orchestration for parallel work, premi
 # Clone the repo
 git clone https://github.com/Dennis0424/ultrabuilder.git
 
-# Copy all skills to your Claude Code skills directory
 # macOS/Linux:
 cp -r ultrabuilder/skills/* ~/.claude/skills/
 
@@ -54,11 +51,11 @@ cp -r ultrabuilder/skills/* ~/.claude/skills/
 ### Usage
 
 ```
-/ultrabuilder          # Full pipeline: think → plan → build → verify → deliver
-/ultrabuilder --quick  # Skip thinking phase, start planning
-/ultrabuilder --design # Expand design sub-pipeline for UI-heavy work
-/ultrabuilder --backend # No design skills, DX-focused
-/ultrabuilder --resume # Continue from where you left off
+/ultrabuilder              # Full pipeline: grill → decide → build → verify → ship
+/ultrabuilder --quick      # Skip Phase 0 (you know what to build)
+/ultrabuilder --resume     # Continue from where you left off
+/ultrabuilder --backend    # No design skills, DX-focused
+/ultrabuilder --design     # Expand design sub-pipeline for UI-heavy work
 ```
 
 Or invoke any individual skill directly.
@@ -67,42 +64,42 @@ Or invoke any individual skill directly.
 
 ## All Skills (36)
 
-### Strategy & Planning
+### Strategy & Grilling
 
 | Skill | What it does |
 |-------|-------------|
 | `/office-hours` | 6 forcing questions that challenge premises before any plan exists |
-| `/autoplan` | Auto-resolved CEO/Design/Eng review - surfaces only taste decisions |
+| `/autoplan` | Auto-resolved review — surfaces only genuine taste decisions |
 | `/build-direction` | Full manual strategic review (CEO → Eng → Design) |
 | `/spec` | Vague intent → precise executable spec with quality gate |
-| `/dx-review` | Developer experience audit - TTHW benchmarks, persona tracing |
-| `/api-design` | REST/GraphQL API architecture - endpoints, errors, versioning |
+| `/dx-review` | Developer experience audit — TTHW benchmarks, persona tracing |
+| `/api-design` | REST/GraphQL API architecture — endpoints, errors, versioning |
 
 ### Agent Orchestration
 
 | Skill | What it does |
 |-------|-------------|
-| `/multi-agent` | Parallel subagent orchestration - fan-out, implement+review, generate+judge |
-| `/pair-program` | Structured pair programming - driver/navigator, ping-pong TDD |
-| `/code-review-agent` | Adversarial code review - finds bugs that pass CI |
-| `/test-gen` | AI-driven test generation - unit, integration, e2e from code analysis |
+| `/multi-agent` | Parallel subagent orchestration — fan-out, implement+review, generate+judge |
+| `/pair-program` | Structured pair programming — driver/navigator, ping-pong TDD |
+| `/code-review-agent` | Adversarial code review — finds bugs that pass CI |
+| `/test-gen` | AI-driven test generation — unit, integration, e2e from code analysis |
 
 ### UI/Frontend Craft
 
 | Skill | What it does |
 |-------|-------------|
-| `/component-arch` | Component architecture - composition, prop design, file structure |
-| `/accessibility` | WCAG audit + fixes - keyboard, screen readers, contrast, ARIA |
-| `/responsive` | Mobile-first responsive - breakpoints, fluid type, container queries |
-| `/state-management` | State architecture - local vs global, server state, state machines |
+| `/component-arch` | Component architecture — composition, prop design, file structure |
+| `/accessibility` | WCAG audit + fixes — keyboard, screen readers, contrast, ARIA |
+| `/responsive` | Mobile-first responsive — breakpoints, fluid type, container queries |
+| `/state-management` | State architecture — local vs global, server state, state machines |
 
 ### Animation & Motion
 
 | Skill | What it does |
 |-------|-------------|
-| `/motion-design` | Animation system - Motion/GSAP, easing, orchestration, performance |
-| `/scroll-story` | Scroll-driven storytelling - sticky stack, horizontal pan, parallax |
-| `/page-transitions` | Route animations - View Transitions API, shared layout, enter/exit |
+| `/motion-design` | Animation system — Motion/GSAP, easing, orchestration, performance |
+| `/scroll-story` | Scroll-driven storytelling — sticky stack, horizontal pan, parallax |
+| `/page-transitions` | Route animations — View Transitions API, shared layout, enter/exit |
 
 ### Design
 
@@ -117,10 +114,10 @@ Or invoke any individual skill directly.
 |-------|-------------|
 | `/build` | Simple 4-phase orchestrator |
 | `/build-execute` | Brainstorm → task breakdown → TDD loop |
-| `/investigate` | Systematic root-cause debugging (Iron Law, 3-attempt limit) |
-| `/refactor` | Systematic refactoring - extract, rename, restructure safely |
-| `/ai-integration` | LLM features in production - streaming, RAG, structured output |
-| `/performance` | Performance optimization - bundle, rendering, network, runtime |
+| `/investigate` | Systematic root-cause debugging (tight feedback loop, 3-attempt limit) |
+| `/refactor` | Systematic refactoring — extract, rename, restructure safely |
+| `/ai-integration` | LLM features in production — streaming, RAG, structured output |
+| `/performance` | Performance optimization — bundle, rendering, network, runtime |
 
 ### Verification & Quality
 
@@ -134,9 +131,9 @@ Or invoke any individual skill directly.
 
 | Skill | What it does |
 |-------|-------------|
-| `/build-ship` | Push + PR + retrospective |
+| `/build-ship` | Push + PR + pre-ship checklist |
 | `/land-and-deploy` | Merge PR → CI → deploy → verify production |
-| `/canary` | Post-deploy monitoring loop |
+| `/canary` | Post-deploy monitoring loop (15 min, CLEAR/WARNING/ALERT) |
 
 ### Documentation & Diagrams
 
@@ -149,33 +146,25 @@ Or invoke any individual skill directly.
 
 | Skill | What it does |
 |-------|-------------|
-| `/learn` | Cross-session institutional memory with confidence scores |
+| `/learn` | Cross-session institutional memory |
 | `/context-save` | Save/restore session state |
 
 ### Orchestrator
 
 | Skill | What it does |
 |-------|-------------|
-| `/ultrabuilder` | Master pipeline combining all phases with gates |
+| `/ultrabuilder` | Master pipeline — five phases with completion criteria gates |
 
 ---
 
-## How the Pipeline Works
+## When NOT to Use
 
-### Phase 0: THINK
-Challenge whether this is worth building. `/office-hours` asks 6 uncomfortable questions. `/pair-program` if you want to think collaboratively.
+- Trivial changes (< 20 lines, clear scope) → just do it
+- Pure research / exploration → use `/deep-research`
+- Bug fix with known root cause → use `/investigate` directly
+- Routine refactor → use `/refactor` directly
 
-### Phase 1: PLAN
-Lock direction before writing code. `/autoplan` for speed, `/build-direction` for thoroughness. Add `/spec` for complex features, `/dx-review` for developer tools, `/api-design` for backends, `/component-arch` for frontend structure.
-
-### Phase 2: BUILD
-Execute with discipline. Start with `writing-plans` to decompose the spec into an ordered implementation plan with clear dependencies and acceptance criteria. Then design system (`/design-explore`), animation (`/motion-design`, `/scroll-story`), then TDD implementation (`/build-execute`) using the plan as backbone. Use `/investigate` for bugs, `/refactor` for cleanup, `/multi-agent` for parallel work, `/ai-integration` for LLM features.
-
-### Phase 3: VERIFY
-Catch everything. `/code-review-agent` for adversarial review, `/test-gen` for coverage gaps, `/health` for quality score, `/benchmark` for performance, `/accessibility` for WCAG compliance.
-
-### Phase 4: DELIVER
-Ship confidently. `/build-ship` creates the PR, `/land-and-deploy` gets it to production, `/canary` monitors. Then `/document`, run retro, `/learn` to save institutional knowledge.
+The pipeline exists for work where getting it wrong is expensive. If the blast radius is small, skip the ceremony.
 
 ---
 
@@ -205,6 +194,7 @@ Fork this repo, edit, re-copy to `~/.claude/skills/`.
 ## Credits
 
 Synthesized from:
-- **[gstack](https://github.com/garrytan/gstack)** by Garry Tan - strategic reviews, autoplan, ship/deploy/canary
-- **[superpowers](https://github.com/obra/superpowers)** by Jesse Vincent - execution discipline, TDD, orchestration
+- **[Matt Pocock's skills](https://github.com/mattpocock/skills)** — grilling primitive, fog of war, leading words, completion criteria, context hygiene
+- **[gstack](https://github.com/garrytan/gstack)** by Garry Tan — strategic reviews, autoplan, ship/deploy/canary
+- **[superpowers](https://github.com/obra/superpowers)** by Jesse Vincent — execution discipline, TDD, subagent orchestration
 - Original craft skills for UI, animation, agents, and AI integration

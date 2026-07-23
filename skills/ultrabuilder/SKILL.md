@@ -1,6 +1,6 @@
 ---
 name: ultrabuilder
-description: "Advanced full-cycle orchestrator — combines gstack strategy + superpowers execution + premium design into one unified pipeline. From vague idea to shipped, monitored, documented product."
+description: "Full-cycle delivery — from vague idea to shipped product. Grill → Decide → Build → Verify → Ship. Each phase gates the next."
 triggers:
   - "ultrabuilder"
   - "full cycle"
@@ -9,317 +9,261 @@ triggers:
   - "advanced build"
 ---
 
-# UltraBuilder — Advanced Full-Cycle Pipeline
+# UltraBuilder
 
-> gstack strategic thinking + superpowers execution discipline + premium design craft
-
-## Overview
-
-This is the master orchestrator that sequences ALL available skills into a coherent product delivery pipeline. Each phase gates the next. Every skill is optional — skip what doesn't apply.
+Five composable phases. Each works standalone. Each gates the next via completion criteria. Skip what doesn't apply — but never skip the gate check.
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- PHASE 0        PHASE 1         PHASE 2        PHASE 3        PHASE 4
- THINK          PLAN            BUILD          VERIFY         DELIVER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- office-hours   autoplan        design-explore build-verify   build-ship
- context-save   build-direction design-html    benchmark      land-and-deploy
- learn(read)    spec            build-execute  health         canary
-                dx-review       investigate    qa             document
-                                                              diagram
-                                                              learn(write)
-                                                              context-save
-                                                              retro
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- MINDSET:       MINDSET:        MINDSET:       MINDSET:       MINDSET:
- Challenge      Decide          Execute        Validate       Ship & Learn
- everything     precisely       solidly        ruthlessly     confidently
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GRILL  ──→  DECIDE  ──→  BUILD  ──→  VERIFY  ──→  SHIP
+ ↑            ↑            ↑           ↑           ↑
+ fog          frontier     red/green   parallel    canary
+ of war       tickets      tight loop  review axes monitoring
 ```
 
-## Phase 0: THINK (Challenge Everything)
+---
 
-**Goal**: Ensure we're building the right thing before investing effort.
+## Phase 0: GRILL
 
-### Step 0.1: Restore Context
-- Check for existing session state (`/context-save` restore)
-- Check learnings (`/learn` read) for relevant past discoveries
-- If resuming previous work, skip to wherever we left off
+**Leading word:** *scrutiny*
 
-### Step 0.2: Office Hours
-- Run `/office-hours` — 6 forcing questions
-- Challenge premises, find the real problem
-- If the idea doesn't survive scrutiny → STOP (save the user days of wasted work)
+The single highest-leverage thing you can do is challenge the idea before investing. Most wasted work happens because nobody asked "why?" hard enough.
 
-### Gate 0→1
-Ask: **"Idea survived scrutiny. Ready to plan?"**
-- Yes → Phase 1
-- Need more thinking → loop back
-- Kill it → stop, save learning about why
+**The Grilling Primitive** (use this verbatim):
+
+> Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies one-by-one. For each question, provide your recommended answer. Ask questions one at a time. If a fact can be found by exploring the environment, look it up rather than asking me. The decisions, though, are mine.
+
+Run this until you can state the goal in one sentence without hedging.
+
+**Completion criteria (all must be true):**
+- [ ] Goal stated in one sentence
+- [ ] Who benefits and how — named specifically
+- [ ] What this is NOT (explicit anti-scope)
+- [ ] Kill condition identified ("we'd stop if...")
+- [ ] Surviving premises: none of the original assumptions collapsed
+
+If the idea dies here → good. Save the learning. Time saved: days to weeks.
+
+**Gate:** "The goal is [X]. The anti-scope is [Y]. Still worth building?"
 
 ---
 
-## Phase 1: PLAN (Decide Precisely)
+## Phase 1: DECIDE
 
-**Goal**: Lock direction, architecture, and scope before writing code.
+**Leading word:** *frontier*
 
-### Step 1.1: Strategic Review (pick one path)
+Plan only what you can state precisely. Everything else is fog — it graduates into tickets as preceding decisions resolve. Resist the pull to "just start building." That impulse = you've reached the edge of what you understand.
 
-**Path A — Full manual review** (`/build-direction`):
-- CEO Review: Is this worth building? What scope?
-- Eng Review: Is the architecture sound?
-- Design Review: Will users love this?
-- Best for: novel products, high-stakes decisions, exploring unknowns
+### 1.1 Map the fog
 
-**Path B — Automated review** (`/autoplan`):
-- Auto-resolves routine decisions using 6 principles
-- Surfaces only genuine taste calls for human input
-- Best for: incremental features, familiar territory, speed
+List what you know vs. what's still unclear:
+- **Known:** decisions already made (from Phase 0)
+- **Frontier:** questions you can answer right now
+- **Fog:** things you sense are coming but can't yet specify
 
-### Step 1.2: Spec (if complex)
-- Run `/spec` for complex features
-- Vague → precise, with quality gate (blocks if any dimension < 7/10)
-- Skip for simple features where direction review is enough
+Only frontier items become tickets. Fog stays as fog until its dependencies resolve.
 
-### Step 1.3: DX Review (if developer-facing)
-- Run `/dx-review` if building APIs, SDKs, CLIs, or developer tools
-- TTHW benchmark, persona tracing, friction mapping
-- Skip for pure consumer UI
+### 1.2 Decide architecture
 
-### Step 1.4: Save checkpoint
-- `/context-save` the plan state
-- Commit `PLAN.md` / `SPEC.md` / `DIRECTION.md`
+Pick ONE path based on complexity:
 
-### Gate 1→2
-Ask: **"Plan locked. Ready to build?"**
-- Yes → Phase 2
-- Adjust plan → loop back to relevant step
-- Park it → save context for later
+| Signal | Path |
+|--------|------|
+| Simple feature, familiar territory | Brainstorm 3 approaches → pick → go |
+| Complex feature, unknowns | `/spec` → quality gate (all dimensions ≥ 7/10) |
+| Novel system, high stakes | `/build-direction` (CEO + Eng + Design review) |
+| Developer-facing (API/CLI/SDK) | Add `/dx-review` (TTHW benchmark) |
 
----
+### 1.3 Design It Twice (if architecture unclear)
 
-## Phase 2: BUILD (Execute Solidly)
+Spawn 3 parallel explorations with different constraints:
+1. Minimize interface (fewest entry points)
+2. Maximize flexibility (most extensible)
+3. Optimize for the most common caller
 
-**Goal**: Turn the plan into working software with premium craft.
+Compare on: depth, locality, seam placement. Pick the winner. Graft best ideas from runners-up.
 
-### Step 2.1: Design (if UI exists)
+**Completion criteria:**
+- [ ] Architecture documented (one paragraph or diagram, not a novel)
+- [ ] All frontier questions resolved — new fog may have graduated
+- [ ] No decision depends on another unresolved decision
+- [ ] Spec/direction committed (if produced)
 
-**Choose design skills based on project type:**
-
-| Project Type | Primary Skill | Supporting Skills |
-|-------------|---------------|-------------------|
-| Landing page / marketing | `/design-taste-frontend` | `/imagegen-frontend-web`, `/gpt-taste` |
-| Mobile app | `/imagegen-frontend-mobile` | `/design-explore` |
-| Dashboard / product UI | `/impeccable` | `/shadcn`, `/high-end-visual-design` |
-| Redesign of existing | `/redesign-existing-projects` | `/design-explore` |
-| Brand identity needed | `/brandkit` | `/design-explore` |
-| Brutalist / editorial | `/industrial-brutalist-ui` or `/minimalist-ui` | — |
-| Design system from scratch | `/design-explore` (consultation mode) | — |
-| Mockup → code | `/design-html` or `/image-to-code` | — |
-| Stitch/agent-friendly | `/stitch-design-taste` | — |
-
-**Design sub-pipeline:**
-1. Explore direction → `/design-explore` (variants + taste memory)
-2. Generate reference images → appropriate `/imagegen-*` skill
-3. Implement → `/design-html` or `/image-to-code`
-4. Apply design system → `/shadcn` if using component library
-5. Enforce quality → `/full-output-enforcement` (no truncated output)
-
-### Step 2.2: Implementation (`/build-execute`)
-
-1. **Brainstorm** — 3 approaches (fast/balanced/thorough), user picks
-2. **Task breakdown** — decompose into small, testable, commitable units
-3. **TDD loop** per task:
-   ```
-   RED → GREEN → REFACTOR → COMMIT → NEXT
-   ```
-4. **Integration check** — full suite passes, feature works end-to-end
-
-### Step 2.3: Debug (if issues arise)
-- Run `/investigate` for mysterious bugs
-- Iron Law: no fixes without root-cause investigation
-- 3-attempt limit before reconsidering approach
-
-### Step 2.4: Continuous checkpoints
-- Commit after each meaningful step
-- `/context-save` periodically for crash resilience
-
-### Gate 2→3
-Ask: **"Implementation complete. Ready for verification?"**
-- Yes → Phase 3
-- More work needed → continue building
-- Pause → save context
+**Gate:** "Decisions locked. Ready to build?"
 
 ---
 
-## Phase 3: VERIFY (Validate Ruthlessly)
+## Phase 2: BUILD
 
-**Goal**: Catch everything before it reaches users.
+**Leading word:** *tight loop*
 
-### Step 3.1: Code Health (`/health`)
-- Run health score — type safety, lint, tests, dead code, deps
-- Must score ≥ 7/10 to proceed
-- Fix issues if below threshold
+The tighter your feedback loop, the faster you converge. Every task must have a pass/fail signal you can run before moving on.
 
-### Step 3.2: Full QA (`/build-verify`)
-- Automated test suite (must pass)
-- Type checking (must pass)
-- Linter (fix auto-fixable, flag rest)
-- Manual QA (if UI — golden path + edge cases)
-- Code review (staff engineer perspective)
+### 2.1 Decompose
 
-### Step 3.3: Security Audit
-- OWASP Top 10 check on the diff
-- Only flag issues with confidence ≥ 8/10
-- Security findings BLOCK shipping
+Use `superpowers:writing-plans` to produce an ordered task list. Each task:
+- Has one clear deliverable
+- Ends with a runnable verification (test, typecheck, visual confirm)
+- Can be reviewed independently
 
-### Step 3.4: Performance (`/benchmark`)
-- Run benchmark before/after comparison
-- Flag any metric > 10% worse
-- Performance regressions require justification or fix
+Skip this for single-file changes. Go straight to red/green.
 
-### Step 3.5: DX Verification (if developer-facing)
-- Re-run `/dx-review` in DX POLISH mode
-- Verify TTHW hasn't degraded
-- Test error messages and examples
+### 2.2 Execute
 
-### Gate 3→4
-Ask: **"Verification passed. Ready to ship?"**
-- Yes → Phase 4
-- Issues found → loop back to Phase 2 to fix, then re-verify
-- Blocked → investigate, ask for help
+Use `superpowers:subagent-driven-development` for multi-task plans. Each task follows:
+
+```
+RED → GREEN → REFACTOR → COMMIT
+```
+
+Rules:
+- Fresh subagent per task (no context pollution between tasks)
+- Review after each task (spec compliance + code quality, two verdicts)
+- If blocked for >3 attempts → stop. The plan is wrong, not the execution.
+- Commit after each green. Never batch commits.
+
+### 2.3 Design (if UI)
+
+| Project Type | Primary Skill |
+|-------------|---------------|
+| Marketing / landing | `/design-taste-frontend` |
+| Product UI / dashboard | `/impeccable` + `/shadcn` |
+| Mobile | `/imagegen-frontend-mobile` |
+| Redesign | `/redesign-existing-projects` |
+| Mockup → code | `/design-html` or `/image-to-code` |
+
+### 2.4 Debug (if stuck)
+
+Run `/investigate`. Iron law: no fixes without root cause. If you catch yourself hypothesizing without a failing test — STOP. Construct the feedback loop first.
+
+**Completion criteria:**
+- [ ] All tasks green (tests pass)
+- [ ] Feature works end-to-end (not just unit tests — drive the real flow)
+- [ ] No TODO/FIXME left in new code
+- [ ] Committed and clean working tree
+
+**Gate:** "Implementation complete. Ready for verification?"
 
 ---
 
-## Phase 4: DELIVER (Ship & Learn)
+## Phase 3: VERIFY
 
-**Goal**: Get it live, verify it works, document it, capture learnings.
+**Leading word:** *parallel axes*
 
-### Step 4.1: Ship (`/build-ship`)
-- Pre-ship checklist (tests pass, no uncommitted changes, up to date)
-- Push branch, create PR
-- Clear description with test plan
+Review on multiple dimensions simultaneously. A single-axis review has blind spots. Run independent checks that can't contaminate each other.
 
-### Step 4.2: Deploy (`/land-and-deploy`)
-- Merge PR (after approval)
-- Wait for CI → deploy → verify production
-- If deploy fails → investigate, don't auto-revert
+### 3.1 Parallel review (run concurrently)
 
-### Step 4.3: Monitor (`/canary`)
-- Post-deploy monitoring loop (15 min default)
-- Watch for errors, perf regressions, page failures
-- Report: CLEAR / WARNING / ALERT
+**Axis 1 — Standards:** Does the code meet engineering standards?
+- Type safety (mypy/tsc must pass)
+- Lint clean (auto-fix what's fixable)
+- Test coverage on new code
+- No dead code, no unused imports
 
-### Step 4.4: Document (`/document`)
-- Update existing docs to match changes
-- Generate missing docs using Diataxis
-- Add `/diagram` for architecture if system changed
+**Axis 2 — Spec compliance:** Does it actually do what was decided?
+- Every requirement from Phase 1 has a corresponding implementation
+- Nothing extra was built (YAGNI violation)
+- Edge cases from the grilling are handled
 
-### Step 4.5: Retrospective
-- What went well? What was harder than expected?
-- What would we do differently?
-- Time breakdown across phases
+**Axis 3 — Security:** (if applicable)
+- OWASP Top 10 on the diff
+- Only flag with confidence ≥ 8/10
+- Security findings block shipping
 
-### Step 4.6: Capture Learnings (`/learn`)
-- Save patterns, pitfalls, preferences discovered
-- Update institutional memory
-- Save design taste preferences if UI work was done
+### 3.2 Performance (if applicable)
 
-### Step 4.7: Final Context Save
-- `/context-save` with "COMPLETE" status
-- Clean up WIP commits if any remain
+Run `/benchmark` before/after. Flag any metric >10% worse. Regressions require justification or fix.
+
+### 3.3 Integration check
+
+Run the full test suite. If it takes >5 minutes, run the subset touching changed files first — but the full suite must pass before shipping.
+
+**Completion criteria:**
+- [ ] Standards axis: clean
+- [ ] Spec axis: all requirements covered, nothing extra
+- [ ] Security: no blockers
+- [ ] Full test suite: green
+- [ ] Performance: no regressions (or justified)
+
+**Gate:** "Verification passed. Ready to ship?"
+
+---
+
+## Phase 4: SHIP
+
+**Leading word:** *canary*
+
+Ship small, watch closely, learn fast.
+
+### 4.1 Deliver
+
+- Commit message: imperative mood, one line, says WHY not WHAT
+- Push branch, create PR with test plan
+- Or commit directly to main if solo + tests pass + change is small
+
+### 4.2 Monitor (if deployed)
+
+Post-deploy: watch for 15 minutes. Errors, latency spikes, page failures. Report: CLEAR / WARNING / ALERT.
+
+### 4.3 Learn
+
+Capture only what was surprising or non-obvious:
+- What assumption was wrong?
+- What took 3x longer than expected and why?
+- What pattern worked that you'd repeat?
+
+Save to memory. Don't document the obvious.
+
+**Completion criteria:**
+- [ ] Code pushed and merged (or PR created)
+- [ ] No regressions in production (if deployed)
+- [ ] Learnings captured (if any were surprising)
+
+---
+
+## Context Hygiene
+
+These rules prevent the #1 failure mode: context exhaustion.
+
+| Rule | Why |
+|------|-----|
+| Phases 0-1 stay in ONE context window | Cumulative thinking builds on itself |
+| Each BUILD task starts a fresh subagent | Prevents pollution between tasks |
+| Never paste full plan into a subagent | Hand it a brief file; exact values live there |
+| Compact before VERIFY, not during | Review needs full diff context |
+| Handoff (not compact) when switching focus | Preserve decision rationale |
 
 ---
 
 ## Invocation Modes
 
-### Full pipeline
 ```
-/ultrabuilder
+/ultrabuilder              Full pipeline (Phase 0→4)
+/ultrabuilder --quick      Skip Phase 0 (you know what to build)
+/ultrabuilder --resume     Check context-save, continue where you left off
+/ultrabuilder --backend    Skip design skills, add DX review emphasis
+/ultrabuilder --design     Expand design sub-pipeline in Phase 2
 ```
-Runs Phase 0 → 4 with gates between each.
-
-### Quick mode (skip Phase 0)
-```
-/ultrabuilder --quick
-```
-Starts at Phase 1. Use when you already know what to build.
-
-### Design-heavy mode
-```
-/ultrabuilder --design
-```
-Expands Phase 2.1 design sub-pipeline, runs full design exploration.
-
-### Backend-only mode
-```
-/ultrabuilder --backend
-```
-Skips all design skills, adds DX review emphasis, skips browser QA.
-
-### Resume mode
-```
-/ultrabuilder --resume
-```
-Checks context-save, finds where you left off, continues from there.
 
 ---
 
-## Skill Selection Matrix
+## Decision Principles
 
-The orchestrator auto-selects skills based on project detection:
+When making routine choices within any phase:
 
-| Signal | Skills Activated |
-|--------|-----------------|
-| Has `package.json` + React/Vue/Svelte | Design skills + `/shadcn` + browser QA |
-| Has API routes / Express / FastAPI | `/dx-review` + API testing |
-| Has `tsconfig.json` | Type safety in `/health` |
-| Has test runner configured | TDD in `/build-execute` |
-| Has CI/CD config | `/land-and-deploy` + `/canary` |
-| Has existing docs | `/document` in release mode |
-| Is a CLI / SDK / library | Heavy `/dx-review` |
-| Has `components.json` (shadcn) | `/shadcn` for component work |
-| User mentions "mobile" | `/imagegen-frontend-mobile` |
-| User mentions "brand" | `/brandkit` |
+1. **Existing patterns win** — continue what the codebase does
+2. **Reversible over permanent** — prefer undoable choices
+3. **Simple over clever** — three similar lines > premature abstraction
+4. **Defer ambiguous** — surface to user, don't guess
+5. **Escalate security** — always ask
+6. **No-op test** — if removing this decision changes nothing, don't make it
 
 ---
 
-## Decision Principles (inherited from autoplan)
+## When NOT to Use
 
-When making routine decisions within any phase:
+- Trivial changes (< 20 lines, clear scope) → just do it
+- Pure research / exploration → use `/deep-research`
+- Bug fix with known root cause → use `/investigate` directly
+- Routine refactor → use `/refactor` directly
 
-1. **Prefer completeness** — full > partial unless 3x cost
-2. **Match existing patterns** — continue what the codebase does
-3. **Choose reversible** — prefer undoable over permanent
-4. **Match past preferences** — check `/learn` memory
-5. **Defer ambiguous** — surface to user
-6. **Escalate security** — always ask the user
-
----
-
-## Anti-Patterns (what this pipeline prevents)
-
-| Without Pipeline | With Pipeline |
-|-----------------|---------------|
-| Build first, ask questions later | Challenge idea before investing |
-| Guess at solutions | Investigate root cause |
-| Ship without verification | Multi-layer QA gate |
-| Forget what we learned | Institutional memory compounds |
-| Lose context on crash | Session state preservation |
-| Generic AI-looking UI | Premium design skills with taste memory |
-| Deploy and pray | Canary monitoring catches issues early |
-| Outdated docs | Auto-update on every release |
-| Performance regression | Benchmark before/after |
-| Same mistakes repeated | Learnings prevent repetition |
-
----
-
-## Principles
-
-1. **Gates are not bureaucracy** — they prevent expensive mistakes early
-2. **Skip what doesn't apply** — not every project needs every skill
-3. **The user is always in control** — never auto-advance, always ask
-4. **Compound learning** — every cycle makes the next one better
-5. **Premium craft** — the design skills exist to prevent generic AI output
-6. **Reversibility** — prefer approaches that can be undone
-7. **Complete the loop** — retro + learn + context-save = continuous improvement
+The pipeline exists for work where getting it wrong is expensive. If the blast radius is small, skip the ceremony.
